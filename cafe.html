@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cafe</title>
+<style>
+    html{
+        scroll-behavior:smooth;
+    }
+
+    body{
+        background-color: #ffffff;
+        background-image: 
+            linear-gradient(#f7f7f7 1px, transparent 1px),
+            linear-gradient(90deg, #f7f7f7 1px, transparent 1px);
+        background-size: 40px 40px;
+        margin:0;
+        font-family:'Poppins',sans-serif;
+        text-align:center;
+    }
+
+    h2{
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    /* ヘッダー */
+
+    header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding: 5px;
+        z-index: 10;
+        background:#6b4f3f;
+        color:white;
+        height: 70px;
+        position:sticky;
+        top:0;
+        text-align:left;
+    }
+
+    header h1{
+        margin:10px;
+        font-weight:bold;
+        font-size:20px;
+    }
+
+    .nav-menu{
+        display:flex;
+        gap: 5px;
+        margin-left:auto;
+        margin-right:0;
+    }
+
+    .nav-menu a{
+        text-decoration:none;
+        color:white;
+        font-weight:bold;
+    }
+
+    /* メイン画像　*/
+
+    img{
+        max-width:100%;
+    }
+
+    .hero{
+        background-image:url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");
+        height:400px;
+        background-size:cover;
+        background-position:center;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        color:white;
+        position: relative;
+    }
+
+    .hero::before{
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.3);
+    }
+
+    .hero h1,
+    .hero p{
+        position: relative;
+    }
+
+    nav{
+        margin-top: 10px;
+    }
+
+    .nav-menu a{
+        background:#8b5e3c;
+        padding: 10px 20px;
+        border-radius:10px;
+        display:block;
+    }
+
+    .nav-menu a:hover{
+        opacity:0.7;
+    }
+
+    /* セクション */
+
+    section{
+        padding:40px;
+    }
+
+    /* メニュー */
+
+    .menu{
+        display:flex;
+        justify-content:center;
+        gap:20px;
+    }
+
+    .card{
+        width: 200px;
+        background:white;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.08);
+        transition:0.3s;
+    }
+    .card img{
+        width:100%;
+        height:150px;
+        object-fit:cover;
+        border-radius: 10px;
+    }
+
+    .card h3{
+        margin:10px 0 5px;
+    }
+
+    .card:hover{
+        transform:translateY(-10px);
+    }
+
+    .item{
+        background:#f4f4f4;
+        padding:20px;
+        border-radius:10px;
+        width: 200px;
+    }
+
+    .item:hover{
+        transform:scale(1.1);
+    }
+
+    /* ボタン */
+
+    .btn{
+        border:none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        transition:0.3s;
+        background:#ff6b6b;
+        color:white;
+        padding:12px 25px;
+        text-decoration:none;
+    }
+
+    .btn:hover{
+        transform:scale(1.1);
+    }
+
+    footer{
+        background:#6b4f3f;
+        color:white;
+        padding:20px;
+        margin-top:40px;
+    }
+
+    /* fade */
+    .fade{
+        opacity:0;
+        transform:translateY(50px);
+        transition:1s;
+        }
+
+    .fade.show{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+    /* ハンバーガー */
+
+    .hamburger{
+        display:none;
+        position:absolute;
+        right:10px;
+        top: 20px;
+    }
+
+    .hamburger-menu{
+        opacity:0;
+        visibility:hidden;
+    }
+
+        
+
+    @media(max-width:768px){
+        .menu-container{
+            flex-direction:column;
+            align-items:center;
+        }
+
+        .nav-menu{
+            display:none;
+        }
+        
+        .menu{
+            display:block;
+        }
+
+        iframe{
+            width: 100%;
+            height: 300px;
+            border: 0;
+        }
+        
+        .hamburger{
+            margin-left:auto;
+            width:30px;
+            cursor:pointer;
+            display:block;
+            background:rgb(120, 89, 89);
+            padding:5px 7px;
+        }
+
+        .hamburger span{
+            display:block;
+            width: 30px;
+            height: 3px;
+            background:black;
+            margin:6px 0;
+        }
+
+        .hamburger-menu{
+            backdrop-filter:blur(10px);
+            position: absolute;
+            top:87%;
+            right:0;
+            width:100%;
+            height: 200px;
+            list-style:none;
+            padding: 30px 0;
+            transform:translateX(100%);
+            transition:0.3s ease;
+         }
+
+         .hamburger-menu.active{
+            display:block;
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+         }
+
+        .hamburger-menu li{
+            text-decoration:none;
+            border-bottom:1px solid #3b3b3b;
+            list-style:none;
+            margin: 20px;
+        }
+
+        .hamburger-menu a{
+            text-decoration:none;
+            font-weight:bold;
+            margin:20px 0;
+            list-style:none;
+            color:black;
+            font-size:15px;
+        }
+
+        .close-btn{
+            position:absolute;
+            top:10px;
+            right: 10px;
+            font-size:24px;
+            cursor:pointer;
+        }
+
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>Tommy Coffee.</h1>
+        <nav class="nav-menu">
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#access">Access</a>
+            <a href="#sns">SNS</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="hamburger-menu">
+            <div class="close-btn">×</div>
+            <ul>
+                <li><a href="#home">- Home</a></li>
+                <li><a href="#menu">- Menu</a></li>
+                <li><a href="#access">- Access</a></li>
+                <li><a href="#sns">- sns</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero" id="home">
+    <h1>Tommy Coffee.</h1>
+    <p>Relax Coffee Time</p>
+    </section>
+
+    <section class="fade">
+        <h2>welcome</h2>
+        <p>
+            ゆっくりできるカフェです。<br>
+            コーヒーとスイーツを楽しんでください。
+        </p>
+    </section>
+    <section class="fade" id="menu">
+        <h2>MENU</h2>
+        <div class="menu">
+            <div class="card">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" alt="コーヒー">
+            <h3>Coffee</h3>
+            <p>¥400</p>
+            </div>
+            <div class="card">
+            <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e" alt="ケーキ">
+            <h3>Cake</h3>
+            <p>¥500</p>
+            </div>
+            <div class="card">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff" alt="クロワッサン">
+            <h3>Croissant</h3>
+            <p>¥350</p>
+            </div>
+        </div>
+    </section>
+    <section class="fade" id="access">
+        <h2>Access</h2>
+        <p>Open 10:00 - 20:00</p>
+        <iframe
+             src="https://www.google.com/maps?q=shibuya&output=embed"
+            width="600"
+            height="300"
+             style="border:0;"
+             loading="lazy">
+         </iframe>
+    </section>
+    <section class="fade" id="sns">
+        <h2>SNS</h2>
+        <a href="https://instagram.com" target="_blank" class="btn">Instagram</a>
+    </section>
+<footer>
+    <p>© 2026 Tommy Coffee</p>
+    <p>Instagram | Twitter</p>
+</footer>
+
+<script>
+    const fadeElements = document.querySelectorAll(".fade");
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add("show");
+            }
+
+        });
+    });
+    fadeElements.forEach(el => {
+        observer.observe(el);
+    });
+
+    const hamburger = document.querySelector(".hamburger");
+        const nav = document.querySelector(".hamburger-menu");
+        const closeBtn = document.querySelector(".close-btn");
+
+        hamburger.addEventListener("click", function(){
+            nav.classList.toggle("active");
+        });
+
+        closeBtn.addEventListener("click", function(){
+            nav.classList.remove("active");
+        });
+</script>
+
+
+</body>
+</html>
